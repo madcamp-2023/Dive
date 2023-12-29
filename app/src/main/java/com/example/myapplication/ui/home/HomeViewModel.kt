@@ -3,11 +3,30 @@ package com.example.myapplication.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.R
 
 class HomeViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    private val _images = MutableLiveData<List<Int>>().apply {
+        value = listOf(
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+            R.drawable.haejunejung,
+        )
     }
-    val text: LiveData<String> = _text
+
+    val images: LiveData<List<Int>> = _images
 }
