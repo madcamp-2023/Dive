@@ -1,15 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     tools:context=".ui.home.HomeFragment">
 
-    <GridLayout
-        android:id="@+id/gridLayout"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="3" />
-</ScrollView>
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3" />
+    </ScrollView>
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/gallery_navigation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:background="@drawable/rounded_bottom_nav_background"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:labelVisibilityMode="labeled"-->
+<!--        app:menu="@menu/gallery_nav_menu"-->
+<!--        app:itemIconTint="@color/design_default_color_on_primary"-->
+<!--        app:itemTextColor="@color/design_default_color_on_primary"-->
+<!--        android:layout_marginBottom="?attr/actionBarSize"-->
+<!--        />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

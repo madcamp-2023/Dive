@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toolbar
@@ -27,6 +28,11 @@ class Item : AppCompatActivity() {
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         imageUri?.let {
             imageView.setImageURI(it)
+        }
+
+        val backButton = findViewById<Button>(R.id.backButton)
+        backButton.setOnClickListener {
+            finish()
         }
     }
 

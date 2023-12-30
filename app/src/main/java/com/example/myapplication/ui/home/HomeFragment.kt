@@ -1,14 +1,19 @@
 package com.example.myapplication.ui.home
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.ImageView
+import android.widget.ScrollView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,25 +28,43 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var homeViewModel: HomeViewModel
+    private var isLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
+        homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
-
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        // Check if permission is granted
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Request permission
+            requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
+        }
+
+        setupScrollListener()
         homeViewModel.images.observe(
             viewLifecycleOwner,
-            Observer { images -> setupGallery(images) })
+            Observer { images ->
+                setupGallery(images)
+                isLoading = false
+            }
+        )
 
-        // fetching gallery images
-        homeViewModel.fetchImages(requireContext())
+        if (!isLoading) {
+            isLoading = true
+            homeViewModel.fetchImages(requireContext())
+        }
 
         root.post {
             val navBarHeight =
@@ -50,6 +73,18 @@ class HomeFragment : Fragment() {
         }
 
         return root
+    }
+
+    private fun setupScrollListener() {
+        binding.scrollView.setOnScrollChangeListener { v: View, _: Int, _: Int, _: Int, _: Int ->
+            val scrollView = v as ScrollView
+            if (scrollView.getChildAt(0).bottom <= (scrollView.height + scrollView.scrollY)) {
+                if (!isLoading) {
+                    isLoading = true
+                    homeViewModel.fetchImages(requireContext())
+                }
+            }
+        }
     }
 
     private fun setupGallery(images: List<ImageData>) {
