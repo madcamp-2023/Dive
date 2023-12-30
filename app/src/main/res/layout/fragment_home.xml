@@ -20,18 +20,4 @@
             android:columnCount="3" />
     </ScrollView>
 
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/gallery_navigation"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        android:background="@drawable/rounded_bottom_nav_background"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:labelVisibilityMode="labeled"-->
-<!--        app:menu="@menu/gallery_nav_menu"-->
-<!--        app:itemIconTint="@color/design_default_color_on_primary"-->
-<!--        app:itemTextColor="@color/design_default_color_on_primary"-->
-<!--        android:layout_marginBottom="?attr/actionBarSize"-->
-<!--        />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

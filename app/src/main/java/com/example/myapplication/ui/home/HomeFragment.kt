@@ -36,12 +36,6 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
         // Check if permission is granted
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -51,6 +45,13 @@ class HomeFragment : Fragment() {
             // Request permission
             requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
         }
+
+
+        homeViewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java)
+
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
         setupScrollListener()
         homeViewModel.images.observe(
@@ -78,7 +79,8 @@ class HomeFragment : Fragment() {
     private fun setupScrollListener() {
         binding.scrollView.setOnScrollChangeListener { v: View, _: Int, _: Int, _: Int, _: Int ->
             val scrollView = v as ScrollView
-            if (scrollView.getChildAt(0).bottom <= (scrollView.height + scrollView.scrollY)) {
+            val threshold = 400 * resources.displayMetrics.density // dp를 픽셀로 변환
+            if (scrollView.getChildAt(0).bottom - (scrollView.height + scrollView.scrollY) <= threshold) {
                 if (!isLoading) {
                     isLoading = true
                     homeViewModel.fetchImages(requireContext())
