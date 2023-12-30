@@ -2,7 +2,6 @@ package com.example.myapplication.ui.dashboard
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.ProfileDetailActivity
 
 
-class ProfileListAdapter(val items: ArrayList<Profile>, val context: Context) :
+class ProfileListAdapter(val items: List<Profile>, val context: Context) :
     RecyclerView.Adapter<ProfileListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -38,17 +37,6 @@ class ProfileListAdapter(val items: ArrayList<Profile>, val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val currentItem = items[position]
-//        if (currentItem.pf_img != 0) {
-//            holder.pf_img.setImageResource(currentItem.pf_img)
-//        } else {
-//            holder.pf_img.setImageResource(R.mipmap.ic_launcher)
-//        }
-//        holder.pf_name.text = currentItem.pf_name
-//        holder.pf_phone.text = currentItem.pf_phone
-//        holder.itemView.setOnClickListener {
-//            Intent(, )
-//        }
         holder.bind(items[position])
     }
 
@@ -59,14 +47,14 @@ class ProfileListAdapter(val items: ArrayList<Profile>, val context: Context) :
 
 
         fun bind(item: Profile) {
-            pf_phone.text = item.pf_phone
-            pf_name.text = item.pf_name
-            Glide.with(itemView).load(item.pf_img).into(pf_img)
-//            if (item.pf_img == null) {
-//                pf_img.setImageResource(R.mipmap.ic_launcher)
-//            } else {
-//                pf_img.setImageResource(item.pf_img)
-//            }
+            pf_phone.text = item.phone
+            pf_name.text = item.name
+
+            if (item.photo == null) {
+                Glide.with(itemView).load(R.mipmap.ic_launcher_round).into(pf_img)
+            } else {
+                Glide.with(itemView).load(item.photo).into(pf_img)
+            }
             val pos = adapterPosition
             if (pos != RecyclerView.NO_POSITION) {
                 itemView.setOnClickListener {
@@ -75,19 +63,13 @@ class ProfileListAdapter(val items: ArrayList<Profile>, val context: Context) :
             }
             itemView.setOnClickListener {
                 Intent(context, ProfileDetailActivity::class.java).apply {
-                    putExtra("data_img", item.pf_img.toString())
-                    putExtra("data_name", item.pf_name)
-                    putExtra("data_phone", item.pf_phone)
+                    putExtra("data_img", item.photo)
+                    putExtra("data_name", item.name)
+                    putExtra("data_phone", item.phone)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }.run { context.startActivity(this)}
+                }.run { context.startActivity(this) }
             }
         }
-
-//        init {
-//            itemView.setOnClickListener(View.OnClickListener {
-//                itemClickListener?.onItemClick(adapterPosition)
-//            })
-//        }
 
     }
 }

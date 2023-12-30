@@ -1,13 +1,22 @@
 package com.example.myapplication.ui.dashboard
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.R
 
 class DashboardViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
+    var profileList = arrayListOf<Profile>(
+        Profile(R.drawable.d, "Sihyun", "010-1111-1111"),
+        Profile(R.drawable.d, "Sihyun", "010-2222-1111"),
+        Profile(R.drawable.d, "Sihyun", "010-3333-1111"),
+        Profile(null, "Sihyun", "010-4444-1111"),
+        Profile(R.drawable.d, "Sihyun", "010-1111-1111"),
+        Profile(R.drawable.d, "Sihyun", "010-2222-1111"),
+        Profile(R.drawable.d, "Sihyun", "010-3333-1111"),
+        Profile(null, "Sihyun", "010-4444-1111"),
+        Profile(R.drawable.d, "Sihyun", "010-1111-1111"),
+        Profile(R.drawable.d, "Sihyun", "010-2222-1111"),
+        Profile(R.drawable.d, "Sihyun", "010-3333-1111"),
+        Profile(null, "Sihyun", "010-4444-1111")
+    )
 }
