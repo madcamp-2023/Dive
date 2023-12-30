@@ -1,15 +1,20 @@
 package com.example.myapplication.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentDashboardBinding? = null
 
@@ -17,33 +22,57 @@ class DashboardFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    //    private val profileList = ArrayList<Profile>()
+    // dummy data
     private val profileList = arrayListOf<Profile>(
-        Profile("Sihyun", "010-1111-1111"),
-        Profile("Sihyun", "010-2222-1111"),
-        Profile("Sihyun", "010-3333-1111"),
-        Profile("Sihyun", "010-4444-1111")
+        Profile(R.drawable.a, "Sihyun", "010-1111-1111"),
+        Profile(R.drawable.b, "Sihyun", "010-2222-1111"),
+        Profile(0, "Sihyun", "010-3333-1111"),
+        Profile(0, "Sihyun", "010-4444-1111")
     )
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        // inflate the layout
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        binding.listProfile.adapter = ProfileListAdapter(profileList)
-        binding.listProfile.layoutManager = LinearLayoutManager(requireActivity())
-        binding.listProfile.setHasFixedSize(true)
+
+        val bundle = this.arguments
+        if (bundle != null) {
+            val name = bundle.getString("name")
+            val phone = bundle.getString("phone")
+            val img = bundle.getString("image")
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.listProfile.adapter = ProfileListAdapter(profileList)
+        val profileListAdapter = ProfileListAdapter(profileList)
+        binding.listProfile.adapter = profileListAdapter
         binding.listProfile.layoutManager = LinearLayoutManager(requireActivity())
         binding.listProfile.setHasFixedSize(true)
+
+        profileListAdapter.setOnItemClickListener(object : ProfileListAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, data: Profile, pos: Int) {
+                Log.i(data.pf_name, "onClick!!")
+            }
+        })
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.profile -> {
+                Toast.makeText(requireContext(), "Button Clicked", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroyView() {
