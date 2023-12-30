@@ -52,12 +52,12 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    private fun setupGallery(images: List<Uri>) {
+    private fun setupGallery(images: List<ImageData>) {
         val gridLayout = binding.gridLayout
         val screenWidth = Resources.getSystem().displayMetrics.widthPixels
         val cellSize = screenWidth / gridLayout.columnCount
 
-        images.forEach { imageUri ->
+        images.forEach { image ->
 
             val imageView = ImageView(context).also {
                 it.layoutParams = GridLayout.LayoutParams(
@@ -68,10 +68,12 @@ class HomeFragment : Fragment() {
                     height = cellSize
                 }
                 it.scaleType = ImageView.ScaleType.CENTER_CROP
-                it.setImageURI(imageUri)
+                it.setImageURI(image.uri)
                 it.setOnClickListener {
                     val intent = Intent(context, Item::class.java)
-                    intent.putExtra("imageUri", imageUri)
+                    intent.putExtra("imageUri", image.uri)
+                    intent.putExtra("imageDate", image.date)
+
                     startActivity(intent)
                 }
             }
