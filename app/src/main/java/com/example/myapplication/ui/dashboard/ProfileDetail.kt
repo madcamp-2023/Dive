@@ -10,19 +10,17 @@ import com.example.myapplication.databinding.ProfileDetailBinding
 
 class ProfileDetailActivity : AppCompatActivity() {
     lateinit var datas : Profile
-    private lateinit var binding: ProfileDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_detail)
 
-        binding = ProfileDetailBinding.inflate(layoutInflater)
-        val detail_name = binding.detailName
-        val detail_img = binding.detailImg
+        val detail_name = findViewById<TextView>(R.id.detail_name)
+        val detail_img = findViewById<ImageView>(R.id.detail_img)
 
-        val data_img = intent.getStringExtra("data")
+        val data_img = intent.getStringExtra("data_img")
         val data_name = intent.getStringExtra("data_name")
-//        val data_phone = intent.getStringExtra("data_phone")
+        val data_phone = intent.getStringExtra("data_phone")
 
         Glide.with(this).load(data_img!!.toInt()).into(detail_img)
         detail_name.text = data_name

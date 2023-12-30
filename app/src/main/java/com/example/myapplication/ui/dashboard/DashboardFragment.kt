@@ -55,7 +55,7 @@ class DashboardFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val profileListAdapter = ProfileListAdapter(profileList)
+        val profileListAdapter = ProfileListAdapter(profileList, requireContext())
         binding.listProfile.adapter = profileListAdapter
         binding.listProfile.layoutManager = LinearLayoutManager(requireActivity())
         binding.listProfile.setHasFixedSize(true)

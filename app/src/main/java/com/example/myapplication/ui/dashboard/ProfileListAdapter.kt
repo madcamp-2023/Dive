@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.ProfileDetailActivity
 
 
-class ProfileListAdapter(val items: ArrayList<Profile>) :
+class ProfileListAdapter(val items: ArrayList<Profile>, val context: Context) :
     RecyclerView.Adapter<ProfileListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -73,14 +73,14 @@ class ProfileListAdapter(val items: ArrayList<Profile>) :
                     listener?.onItemClick(itemView, item, pos)
                 }
             }
-//            itemView.setOnClickListener {
-//                Intent(context, ProfileDetailActivity::class.java).apply {
-//                    putExtra("data_img", item.pf_img.toString())
-//                    putExtra("data_name", item.pf_name)
-//                    putExtra("data_phone", item.pf_phone)
-//                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                }.run { context.startActivity(this)}
-//            }
+            itemView.setOnClickListener {
+                Intent(context, ProfileDetailActivity::class.java).apply {
+                    putExtra("data_img", item.pf_img.toString())
+                    putExtra("data_name", item.pf_name)
+                    putExtra("data_phone", item.pf_phone)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }.run { context.startActivity(this)}
+            }
         }
 
 //        init {

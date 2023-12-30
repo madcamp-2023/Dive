@@ -1,0 +1,92 @@
+[
+  {
+    "name": "대전동물보호센터",
+    "phone": "043-825-1118",
+    "photo": "https://cdn-icons-png.flaticon.com/512/4364/4364608.png"
+  },
+  {
+    "name": "대구시수의사회(동산)",
+    "phone":  "053-254-3366",
+    "photo": "https://cdn-icons-png.flaticon.com/512/1623/1623792.png"
+  },
+  {
+    "name": "세종유기동물보호센터",
+    "phone":  "010-4435-3720",
+    "photo": "https://cdn-icons-png.flaticon.com/512/2527/2527026.png"
+  },
+  {
+    "name": "광주 동물보호소",
+    "phone":  "062-571-2808",
+    "photo": "https://cdn-icons-png.flaticon.com/512/7280/7280992.png"
+  },
+  {
+    "name": "동물보호관리협회",
+    "phone":  "051-971-6208",
+    "photo": "https://cdn-icons-png.flaticon.com/512/4364/4364608.png"
+  },
+  {
+    "name": "서울동물복지지원센터",
+    "phone":  "02-2124-2839",
+    "photo": "https://cdn-icons-png.flaticon.com/512/7280/7280922.png"
+  },
+  {
+    "name": "한국동물구조관리협회",
+    "phone": "02-2133-7648",
+    "photo": "https://cdn-icons-png.flaticon.com/512/616/616574.png"
+  },
+  {
+    "name": "강동리본센터(reborn)",
+    "phone":  "070-4163-7350",
+    "photo": "https://cdn-icons-png.flaticon.com/512/7280/7280954.png"
+  },
+  {
+    "name": "대구유기동물보호센터",
+    "phone":  "053-964-6258",
+    "photo": "https://cdn-icons-png.flaticon.com/512/7280/7280918.png"
+  },
+  {
+    "name": "인천수의사회",
+    "phone":  "032-515-7567",
+    "photo": "https://cdn-icons-png.flaticon.com/512/2965/2965100.png"
+  },
+  {
+    "name": "울산유기동물보호센터",
+    "phone":  "052-238-6113",
+    "photo": "https://cdn-icons-png.flaticon.com/512/7280/7280951.png"
+  },
+  {
+    "name": "일산동물의료센터",
+    "phone":  "052-252-5878",
+    "photo": "https://cdn-icons-png.flaticon.com/512/2829/2829818.png"
+  },
+  {
+    "name": "수원시 동물보호센터",
+    "phone":  "031-228-3557",
+    "photo": "https://cdn-icons-png.flaticon.com/512/4253/4253317.png"
+  },
+  {
+    "name": "용인시 동물보호센터",
+    "phone":  "031-324-3463",
+    "photo": "https://cdn-icons-png.flaticon.com/512/7280/7280914.png"
+  },
+  {
+    "name": "남양유기견보호센터",
+    "phone":  "031-356-2281",
+    "photo": "https://cdn-icons-png.flaticon.com/512/7280/7280929.png"
+  },
+  {
+    "name": "평택시유기동물보호소",
+    "phone":  "031-7674-8101",
+    "photo": "https://cdn-icons-png.flaticon.com/512/5569/5569626.png"
+  },
+  {
+    "name": "양평군유기동물보호소",
+    "phone":  "031-770-2337",
+    "photo": "https://cdn-icons-png.flaticon.com/512/4600/4600205.png"
+  },
+  {
+    "name": "고양시동물보호센터",
+    "phone":  "031-962-3232",
+    "photo": "https://cdn-icons-png.flaticon.com/512/194/194177.png"
+  }
+]
