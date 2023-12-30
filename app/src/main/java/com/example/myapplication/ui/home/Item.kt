@@ -39,14 +39,14 @@ class Item : AppCompatActivity() {
                 val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
                 val toolbarText = findViewById<TextView>(R.id.textView)
 
-                if (toolbar.visibility == View.VISIBLE) {
-                    toolbar.visibility = View.INVISIBLE
+                if (toolbarText.visibility == View.VISIBLE) {
+                    toolbarText.visibility = View.INVISIBLE
                 } else {
-                    toolbar.visibility = View.VISIBLE
+                    toolbarText.visibility = View.VISIBLE
                     toolbarText.text = formattedDate
 
                     Handler(Looper.getMainLooper()).postDelayed({
-                        toolbar.visibility = View.INVISIBLE
+                        toolbarText.visibility = View.INVISIBLE
                     }, 3000)
                 }
             }
