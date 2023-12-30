@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.bumptech.glide.Glide
 import com.example.myapplication.ProfileDetailActivity
+import com.squareup.picasso.Picasso
 
 
 class ProfileListAdapter(val items: List<Profile>, val context: Context) :
@@ -51,9 +52,11 @@ class ProfileListAdapter(val items: List<Profile>, val context: Context) :
             pf_name.text = item.name
 
             if (item.photo == null) {
-                Glide.with(itemView).load(R.mipmap.ic_launcher_round).into(pf_img)
+//                Glide.with(itemView).load(R.mipmap.ic_launcher_round).into(pf_img)
+                Picasso.get().load("https://github.com/madcamp-2023/w1/assets/79096116/c8bad84c-98e7-491c-88ba-e6fb692728cc").into(pf_img)
             } else {
-                Glide.with(itemView).load(item.photo).into(pf_img)
+//                Glide.with(itemView).load(item.photo).into(pf_img)
+                Picasso.get().load(item.photo).into(pf_img)
             }
             val pos = adapterPosition
             if (pos != RecyclerView.NO_POSITION) {

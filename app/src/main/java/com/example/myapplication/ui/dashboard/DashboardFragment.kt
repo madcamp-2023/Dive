@@ -74,7 +74,6 @@ class DashboardFragment : Fragment(), View.OnClickListener {
                 binding.listProfile.layoutManager = LinearLayoutManager(requireActivity())
                 binding.listProfile.setHasFixedSize(true)
 
-
                 profileListAdapter.setOnItemClickListener(object : ProfileListAdapter.OnItemClickListener {
                     override fun onItemClick(v: View, data: Profile, pos: Int) {
                         Log.i(data.name, "onClick!!")
