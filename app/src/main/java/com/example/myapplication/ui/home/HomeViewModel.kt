@@ -20,7 +20,7 @@ class HomeViewModel : ViewModel() {
     val images: LiveData<List<ImageData>> = _images
 
     private var currentPage = 0
-    private var pageSize = 18
+    private var pageSize = 9
 
     fun fetchImages(context: Context) {
         viewModelScope.launch {

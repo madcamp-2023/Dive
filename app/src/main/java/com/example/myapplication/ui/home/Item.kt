@@ -22,17 +22,12 @@ class Item : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.display_image)
 
-        val imageView = findViewById<ImageView>(R.id.imageView)
+        val imageView = findViewById<ImageView>(R.id.image)
         val imageUri: Uri? = intent.getParcelableExtra("imageUri")
 
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
         imageUri?.let {
             imageView.setImageURI(it)
-        }
-
-        val backButton = findViewById<Button>(R.id.backButton)
-        backButton.setOnClickListener {
-            finish()
         }
     }
 
@@ -67,7 +62,7 @@ class Item : AppCompatActivity() {
         val inputDateString = intent.getStringExtra("imageDate") ?: "2023:12:30 01:54:56"
         val inputFormat = SimpleDateFormat("yyyy:MM:dd HH:mm:ss", Locale.getDefault())
         inputFormat.timeZone = TimeZone.getDefault()
-        val outputFormat = SimpleDateFormat("EEEE a hh:mm", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("EEEE a yyyy:MM:dd hh:mm", Locale.getDefault())
         outputFormat.timeZone = TimeZone.getDefault()
         val date: Date? = inputFormat.parse(inputDateString)
 
