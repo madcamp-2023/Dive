@@ -26,7 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.home.Item" />
-        <activity android:name=".ui.home.LoadButton" />
+        <activity android:name=".ui.home.ImageDetail" />
     </application>
 </manifest>

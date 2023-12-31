@@ -1,33 +1,50 @@
 package com.example.myapplication.ui.home
 
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Button
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
+import eightbitlab.com.blurview.BlurView
+import eightbitlab.com.blurview.RenderEffectBlur
+import eightbitlab.com.blurview.RenderScriptBlur
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
-class Item : AppCompatActivity() {
+class ImageDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.display_image)
+        setContentView(R.layout.image_detail)
 
-        val imageView = findViewById<ImageView>(R.id.image)
+        val fullScreenImage = findViewById<ImageView>(R.id.fullScreenImage)
+//        val overlayImage = findViewById<ImageView>(R.id.overlayImage)
         val imageUri: Uri? = intent.getParcelableExtra("imageUri")
 
-        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+        fullScreenImage.scaleType = ImageView.ScaleType.CENTER_CROP
         imageUri?.let {
-            imageView.setImageURI(it)
+            fullScreenImage.setImageURI(it)
+        }
+
+        val blurView = findViewById<BlurView>(R.id.blur_view)
+        val blurRadius = 6f
+
+        val root = findViewById<ViewGroup>(R.id.image_detail_root)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            blurView.setupWith(root, RenderEffectBlur())
+                .setBlurRadius(blurRadius)
+        }else{
+            blurView.setupWith(root, RenderScriptBlur(this))
+                .setBlurRadius(blurRadius)
         }
     }
 

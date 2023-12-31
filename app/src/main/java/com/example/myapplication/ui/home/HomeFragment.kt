@@ -1,12 +1,15 @@
 package com.example.myapplication.ui.home
 
-import android.content.Intent
-import android.content.res.Resources
+import android.content.pm.PackageManager
+import android.graphics.RenderEffect
+import android.graphics.Shader
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +29,16 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        // Check if permission is granted
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Request permission
+            requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
+        }
+
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -39,6 +52,18 @@ class HomeFragment : Fragment() {
         loadImages()
 
         return root
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val blurView = view.findViewById<View>(R.id.blurView)
+
+        val renderEffect = RenderEffect.createBlurEffect(
+            20f, 20f, Shader.TileMode.MIRROR
+        )
+        blurView.setRenderEffect(renderEffect)
     }
 
     private fun setupRecyclerView() {
@@ -65,40 +90,5 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-}
-
-class ImageAdapter(private var images: List<ImageData>) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
-
-    private val cellSize = Resources.getSystem().displayMetrics.widthPixels / 3 // 3은 column count
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.imageView)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.image_item, parent, false)
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
-        imageView.layoutParams.height = cellSize * 2 // 이전과 같은 높이 설정
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val image = images[position]
-        holder.imageView.setImageURI(image.uri)
-        // 이미지 클릭 이벤트 설정
-        holder.imageView.setOnClickListener {
-            val intent = Intent(holder.imageView.context, Item::class.java)
-            intent.putExtra("imageUri", image.uri)
-            intent.putExtra("imageDate", image.date)
-            holder.itemView.context.startActivity(intent)
-        }
-    }
-
-    override fun getItemCount() = images.size
-
-    fun updateImages(newImages: List<ImageData>) {
-        images = newImages
-        notifyDataSetChanged()
     }
 }
