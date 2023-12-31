@@ -2,9 +2,11 @@ package com.example.myapplication.ui.dashboard
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,9 +14,10 @@ import com.example.myapplication.R
 import com.bumptech.glide.Glide
 import com.example.myapplication.ProfileDetailActivity
 import com.squareup.picasso.Picasso
+import java.text.Collator
 
 
-class ProfileListAdapter(val items: List<Profile>, val context: Context) :
+class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context) :
     RecyclerView.Adapter<ProfileListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -22,9 +25,50 @@ class ProfileListAdapter(val items: List<Profile>, val context: Context) :
     }
 
     private var listener: OnItemClickListener? = null
+    val initialItem = ArrayList<Profile>().apply {
+        items.let { addAll(it) }
+    }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
+    }
+
+    fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val filteredList: ArrayList<Profile> = ArrayList()
+                if (constraint.isNullOrEmpty()) {
+                    initialItem.let { filteredList.addAll(it) }
+                } else {
+                    val query = constraint.toString().trim()
+                    initialItem.forEach {
+                        if (it.name!!.contains(query)) {
+                            filteredList.add(it)
+                        }
+                        if (it.phone!!.contains(query)) {
+                            filteredList.add(it)
+                        }
+                    }
+                }
+                val results = FilterResults()
+                results.values = filteredList
+                return results
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                if (results?.values is ArrayList<*>) {
+                    items.clear()
+                    items.addAll(results.values as ArrayList<Profile>)
+                    notifyDataSetChanged()
+                }
+            }
+        }
+    }
+
+    fun updateList(newItems: ArrayList<Profile>) {
+        items = newItems
+        Log.e("Adapter", "${items.size}^^^")
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,6 +83,8 @@ class ProfileListAdapter(val items: List<Profile>, val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
+        Log.e("Adapter", "${items.size}^^^^^")
+
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -52,10 +98,10 @@ class ProfileListAdapter(val items: List<Profile>, val context: Context) :
             pf_name.text = item.name
 
             if (item.photo == null) {
-//                Glide.with(itemView).load(R.mipmap.ic_launcher_round).into(pf_img)
-                Picasso.get().load("https://github.com/madcamp-2023/w1/assets/79096116/c8bad84c-98e7-491c-88ba-e6fb692728cc").into(pf_img)
+                Picasso.get()
+                    .load("https://github.com/madcamp-2023/w1/assets/79096116/c8bad84c-98e7-491c-88ba-e6fb692728cc")
+                    .into(pf_img)
             } else {
-//                Glide.with(itemView).load(item.photo).into(pf_img)
                 Picasso.get().load(item.photo).into(pf_img)
             }
             val pos = adapterPosition
@@ -73,7 +119,6 @@ class ProfileListAdapter(val items: List<Profile>, val context: Context) :
                 }.run { context.startActivity(this) }
             }
         }
-
     }
 }
 

@@ -1,53 +1,93 @@
 package com.example.myapplication.ui.dashboard
 
-import android.content.Context
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.Button
+import android.widget.SearchView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentDashboardBinding
-import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
-import com.google.gson.reflect.TypeToken
-import java.io.IOException
-import java.io.InputStream
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.lang.reflect.Array
 
-class DashboardFragment : Fragment(), View.OnClickListener {
+
+class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+    private lateinit var userList: ArrayList<Profile>
+    private lateinit var searchBar: SearchView
+    private lateinit var addBtn: Button
     private val binding get() = _binding!!
-
-    fun readJsonFromAssets(context: Context, fileName: String): String? {
-        return try {
-            val inputStream: InputStream = context.assets.open(fileName)
-            val size: Int = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-            String(buffer, Charsets.UTF_8)
-        } catch (e: IOException) {
-            e.printStackTrace()
-            null
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // Intent의 데이터를 가져옵니다.
+                val data: Intent? = result.data
+                // 여기서 데이터를 처리합니다.
+                (binding.listProfile.adapter as ProfileListAdapter).updateList(handleResult(data))
+            }
         }
+
+    private fun handleResult(data: Intent?): ArrayList<Profile> {
+        // 결과 데이터를 사용하는 코드
+        if (!::userList.isInitialized) {
+            // Initialize the userList property
+            userList = (ViewModelProvider(this).get(DashboardViewModel::class.java)).userList
+        }
+        Log.e("Dashboard", "${data?.getStringExtra("name")}@@")
+        userList.add(
+            Profile(
+                data?.getStringExtra("photo"),
+                data?.getStringExtra("name"),
+                data?.getStringExtra("phone")
+            )
+        )
+        Log.e("Dashboard", "${userList.size}@@")
+
+        return userList
     }
 
-    fun parseJson(jsonString: String): List<Profile>? {
-        return try {
-            val gson = Gson()
-            val profileListType = object : TypeToken<List<Profile>>() {}.type
-            gson.fromJson(jsonString, profileListType)
-        } catch (e: JsonSyntaxException) {
-            e.printStackTrace()
-            null
+    private fun setupRecyclerView(userList: ArrayList<Profile>) {
+        val profileListAdapter = ProfileListAdapter(userList, requireContext())
+        binding.listProfile.adapter = profileListAdapter
+        binding.listProfile.layoutManager = LinearLayoutManager(requireActivity())
+        binding.listProfile.setHasFixedSize(true)
+        setupSearchBar(profileListAdapter)
+    }
+
+    private fun setupSearchBar(adapter: ProfileListAdapter) {
+        searchBar = binding.searchBar
+        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.getFilter().filter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.getFilter().filter(newText)
+                return true
+            }
+        })
+    }
+
+    private fun setupAddBtn() {
+        addBtn = binding.btnAdd
+        addBtn.setOnClickListener {
+            val intent = Intent(activity, ProfileAddActivity::class.java)
+
+            startForResult.launch(intent)
+//            binding.listProfile.adapter.notifyDataSetChanged()
         }
     }
 
@@ -57,49 +97,30 @@ class DashboardFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        val dashboardViewModel =
+            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        setupRecyclerView(dashboardViewModel.userList)
+        setupAddBtn()
+        binding.root.post {
+            val navBarHeight =
+                requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).height
+            binding.listProfile.setPadding(0, 0, 0, navBarHeight)
+        }
+        return binding.root
     }
 
+
+/*
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val dashboardViewModel =
+            ViewModelProvider(this).get(DashboardViewModel::class.java)
 
-        val jsonString = readJsonFromAssets(requireContext(), "data.json")
-        if (jsonString != null) {
-            val userList = parseJson(jsonString)
-            if (userList != null) {
-                val profileListAdapter = ProfileListAdapter(userList, requireContext())
-                binding.listProfile.adapter = profileListAdapter
-                binding.listProfile.layoutManager = LinearLayoutManager(requireActivity())
-                binding.listProfile.setHasFixedSize(true)
-
-                profileListAdapter.setOnItemClickListener(object : ProfileListAdapter.OnItemClickListener {
-                    override fun onItemClick(v: View, data: Profile, pos: Int) {
-                        Log.i(data.name, "onClick!!")
-                    }
-                })
-            } else {
-                // TODO: handle parsing error
-            }
-        } else {
-            // TODO: handle file reading error
-        }
-
-//        profileListAdapter.setOnItemClickListener(object : ProfileListAdapter.OnItemClickListener {
-//            override fun onItemClick(v: View, data: Profile, pos: Int) {
-//                Log.i(data.name, "onClick!!")
-//            }
-//        })
+        setupRecyclerView(dashboardViewModel.userList)
+        setupAddBtn()
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.profile -> {
-                Toast.makeText(requireContext(), "Button Clicked", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+ */
 
     override fun onDestroyView() {
         super.onDestroyView()
