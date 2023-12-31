@@ -11,7 +11,7 @@ import com.example.myapplication.R
 
 class ImageAdapter(private var images: List<ImageData>) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
-    private val cellSize = Resources.getSystem().displayMetrics.widthPixels / 3 // 3은 column count
+    private val cellSize = Resources.getSystem().displayMetrics.widthPixels / 2 // 3은 column count
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.imageView)
     }
