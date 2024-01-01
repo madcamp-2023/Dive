@@ -6,15 +6,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="68dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <LinearLayout
-            android:id="@+id/fragment_"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -28,12 +44,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <RadioGroup
+                android:id="@+id/memoji_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
                 android:layout_margin="8dp"
-                android:id="@+id/memoji_group">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/btn_memoji_m"
@@ -98,7 +114,7 @@
                     android:baselineAligned="false"
                     android:ems="10"
                     android:inputType="text"
-                    android:text="Name"
+                    android:text="@string/name"
                     app:layout_constraintBottom_toBottomOf="@+id/name_text"
                     app:layout_constraintEnd_toEndOf="@+id/add_contact"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -117,7 +133,7 @@
                     android:id="@+id/contact_text"
                     android:layout_width="112dp"
                     android:layout_height="wrap_content"
-                    android:text="Contact"
+                    android:text="@string/contact"
                     android:textSize="24sp"
                     tools:layout_editor_absoluteX="33dp"
                     tools:layout_editor_absoluteY="481dp" />
@@ -138,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Add Contact"
+                android:text="@string/add_contact"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
