@@ -48,11 +48,15 @@ class DashboardFragment : Fragment() {
                     // Initialize the userList property
                     userList = (ViewModelProvider(this).get(DashboardViewModel::class.java)).userList
                 }
-                userList[data?.getIntExtra("idx", -1)!!] = Profile(
-                    data?.getStringExtra("photo"),
-                    data?.getStringExtra("name"),
-                    data?.getStringExtra("phone"),
-                )
+                if (data?.getBooleanExtra("del", false) == false) {
+                    userList[data?.getIntExtra("idx", -1)!!] = Profile(
+                        data?.getStringExtra("photo"),
+                        data?.getStringExtra("name"),
+                        data?.getStringExtra("phone"),
+                    )
+                } else {
+                    data?.getIntExtra("idx", -1)?.let { userList.removeAt(it) }
+                }
                 (binding.listProfile.adapter as ProfileListAdapter).updateList(userList)
             }
         }

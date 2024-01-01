@@ -16,6 +16,7 @@ class ProfileEditActivity : AppCompatActivity() {
     private lateinit var editPhone: EditText
     private lateinit var editPhoto: ImageView
     private lateinit var submitBtn: Button
+    private lateinit var deleteBtn: Button
 
     // Function to handle button click and apply selected effect
 
@@ -32,6 +33,7 @@ class ProfileEditActivity : AppCompatActivity() {
         editPhone = findViewById(R.id.edit_contact)
         editPhoto = findViewById(R.id.edit_img)
         submitBtn = findViewById(R.id.edit_btn_submit)
+        deleteBtn = findViewById(R.id.delete_btn_submit)
 
         // initialize displayed data with original data
         editName.setText(dataName)
@@ -50,6 +52,24 @@ class ProfileEditActivity : AppCompatActivity() {
             data.putExtra("phone", contact)
             data.putExtra("photo", dataImg)
             data.putExtra("idx", idx)
+            data.putExtra("del", false)
+
+            setResult(Activity.RESULT_OK, data)
+            finish()
+        }
+        deleteBtn.setOnClickListener {
+            val name = editName.text.toString()
+            val contact = editPhone.text.toString()
+
+//            editName.text.clear()
+//            editPhone.text.clear()
+
+            val data = Intent()
+            data.putExtra("name", name)
+            data.putExtra("phone", contact)
+            data.putExtra("photo", dataImg)
+            data.putExtra("idx", idx)
+            data.putExtra("del", true)
 
             setResult(Activity.RESULT_OK, data)
             finish()
