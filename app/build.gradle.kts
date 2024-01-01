@@ -40,6 +40,10 @@ android {
 
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation("org.jsoup:jsoup:1.13.1")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("com.github.Dimezis:BlurView:version-2.0.3")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -57,4 +61,5 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
 }
