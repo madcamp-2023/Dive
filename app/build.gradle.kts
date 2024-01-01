@@ -40,6 +40,7 @@ android {
 
 
 dependencies {
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("com.github.Dimezis:BlurView:version-2.0.3")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

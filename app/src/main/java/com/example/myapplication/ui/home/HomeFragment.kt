@@ -54,17 +54,17 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val blurView = view.findViewById<View>(R.id.blurView)
-
-        val renderEffect = RenderEffect.createBlurEffect(
-            20f, 20f, Shader.TileMode.MIRROR
-        )
-        blurView.setRenderEffect(renderEffect)
-    }
+//    @RequiresApi(Build.VERSION_CODES.S)
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        val blurView = view.findViewById<View>(R.id.blurView)
+//
+//        val renderEffect = RenderEffect.createBlurEffect(
+//            20f, 20f, Shader.TileMode.MIRROR
+//        )
+//        blurView.setRenderEffect(renderEffect)
+//    }
 
     private fun setupRecyclerView() {
         binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
