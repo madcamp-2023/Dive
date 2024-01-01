@@ -11,10 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.bumptech.glide.Glide
 import com.example.myapplication.ProfileDetailActivity
 import com.squareup.picasso.Picasso
-import java.text.Collator
 
 
 class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context) :
