@@ -30,6 +30,7 @@
         <activity android:name=".ui.home.ImageDetail" />
         <activity android:name=".ProfileDetailActivity" />
         <activity android:name=".ui.dashboard.ProfileAddActivity" />
+        <activity android:name=".ui.dashboard.ProfileEditActivity" />
 
     </application>
 </manifest>

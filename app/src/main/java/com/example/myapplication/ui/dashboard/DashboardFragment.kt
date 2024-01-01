@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentDashboardBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.lang.reflect.Array
 
 
 class DashboardFragment : Fragment() {
@@ -29,23 +28,45 @@ class DashboardFragment : Fragment() {
     private lateinit var searchBar: SearchView
     private lateinit var addBtn: Button
     private val binding get() = _binding!!
-    private val startForResult =
+    private val startForResultAdd =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 // Intent의 데이터를 가져옵니다.
                 val data: Intent? = result.data
                 // 여기서 데이터를 처리합니다.
-                (binding.listProfile.adapter as ProfileListAdapter).updateList(handleResult(data))
+                (binding.listProfile.adapter as ProfileListAdapter).updateList(handleResultAdd(data))
             }
         }
 
-    private fun handleResult(data: Intent?): ArrayList<Profile> {
+    private val startForResultEdit =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // Intent의 데이터를 가져옵니다.
+                val data: Intent? = result.data
+                // 여기서 데이터를 처리합니다.
+                if (!::userList.isInitialized) {
+                    // Initialize the userList property
+                    userList = (ViewModelProvider(this).get(DashboardViewModel::class.java)).userList
+                }
+                if (data?.getBooleanExtra("del", false) == false) {
+                    userList[data?.getIntExtra("idx", -1)!!] = Profile(
+                        data?.getStringExtra("photo"),
+                        data?.getStringExtra("name"),
+                        data?.getStringExtra("phone"),
+                    )
+                } else {
+                    data?.getIntExtra("idx", -1)?.let { userList.removeAt(it) }
+                }
+                (binding.listProfile.adapter as ProfileListAdapter).updateList(userList)
+            }
+        }
+
+    fun handleResultAdd(data: Intent?): ArrayList<Profile> {
         // 결과 데이터를 사용하는 코드
         if (!::userList.isInitialized) {
             // Initialize the userList property
             userList = (ViewModelProvider(this).get(DashboardViewModel::class.java)).userList
         }
-        Log.e("Dashboard", "${data?.getStringExtra("name")}@@")
         userList.add(
             Profile(
                 data?.getStringExtra("photo"),
@@ -53,13 +74,27 @@ class DashboardFragment : Fragment() {
                 data?.getStringExtra("phone")
             )
         )
-        Log.e("Dashboard", "${userList.size}@@")
-
         return userList
     }
 
+    /*
+    fun handleResultEdit(data: Intent?): ArrayList<Profile> {
+        // 결과 데이터를 사용하는 코드
+        if (!::userList.isInitialized) {
+            // Initialize the userList property
+            userList = (ViewModelProvider(this).get(DashboardViewModel::class.java)).userList
+        }
+        userList[data?.getIntExtra("idx", -1)!!] = Profile(
+            data?.getStringExtra("photo"),
+            data?.getStringExtra("name"),
+            data?.getStringExtra("phone"),
+        )
+        return userList
+    }
+     */
+
     private fun setupRecyclerView(userList: ArrayList<Profile>) {
-        val profileListAdapter = ProfileListAdapter(userList, requireContext())
+        val profileListAdapter = ProfileListAdapter(userList, requireContext(), startForResultEdit)
         binding.listProfile.adapter = profileListAdapter
         binding.listProfile.layoutManager = LinearLayoutManager(requireActivity())
         binding.listProfile.setHasFixedSize(true)
@@ -86,8 +121,7 @@ class DashboardFragment : Fragment() {
         addBtn.setOnClickListener {
             val intent = Intent(activity, ProfileAddActivity::class.java)
 
-            startForResult.launch(intent)
-//            binding.listProfile.adapter.notifyDataSetChanged()
+            startForResultAdd.launch(intent)
         }
     }
 
