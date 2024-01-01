@@ -9,13 +9,15 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.ProfileDetailActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
 
-class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context) :
+class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, val startForResultEdit: ActivityResultLauncher<Intent>) :
     RecyclerView.Adapter<ProfileListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -81,15 +83,13 @@ class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
-        Log.e("Adapter", "${items.size}^^^^^")
-
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var pf_img: ImageView = itemView.findViewById(R.id.pfImg)
         private var pf_phone: TextView = itemView.findViewById(R.id.pfPhone)
         private var pf_name: TextView = itemView.findViewById(R.id.pfName)
-
+        private var pf_edit: FloatingActionButton = itemView.findViewById(R.id.editBtn)
 
         fun bind(item: Profile) {
             pf_phone.text = item.phone
@@ -115,6 +115,14 @@ class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context) :
                     putExtra("data_phone", item.phone)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }.run { context.startActivity(this) }
+            }
+            pf_edit.setOnClickListener {
+                val intent = Intent(context, ProfileEditActivity::class.java)
+                intent.putExtra("name", item.name)
+                intent.putExtra("phone", item.phone)
+                intent.putExtra("photo", item.photo)
+                intent.putExtra("idx", items.indexOf(item))
+                startForResultEdit.launch(intent)
             }
         }
     }
