@@ -3,6 +3,7 @@ package com.example.myapplication.ui.dashboard
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -27,7 +28,7 @@ class ProfileEditActivity : AppCompatActivity() {
         val dataName = intent.getStringExtra("name")
         val dataPhone = intent.getStringExtra("phone")
         val dataImg = intent.getStringExtra("photo")
-        val idx = intent.getIntExtra("idx", -1)
+
 
         editName = findViewById(R.id.edit_name)
         editPhone = findViewById(R.id.edit_contact)
@@ -44,14 +45,10 @@ class ProfileEditActivity : AppCompatActivity() {
             val name = editName.text.toString()
             val contact = editPhone.text.toString()
 
-//            editName.text.clear()
-//            editPhone.text.clear()
-
             val data = Intent()
             data.putExtra("name", name)
             data.putExtra("phone", contact)
             data.putExtra("photo", dataImg)
-            data.putExtra("idx", idx)
             data.putExtra("del", false)
 
             setResult(Activity.RESULT_OK, data)
@@ -61,14 +58,10 @@ class ProfileEditActivity : AppCompatActivity() {
             val name = editName.text.toString()
             val contact = editPhone.text.toString()
 
-//            editName.text.clear()
-//            editPhone.text.clear()
-
             val data = Intent()
             data.putExtra("name", name)
             data.putExtra("phone", contact)
             data.putExtra("photo", dataImg)
-            data.putExtra("idx", idx)
             data.putExtra("del", true)
 
             setResult(Activity.RESULT_OK, data)

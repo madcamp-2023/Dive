@@ -3,10 +3,14 @@ package com.example.myapplication.ui.dashboard
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
@@ -113,7 +117,8 @@ class DashboardViewModel : ViewModel() {
         }
     ]
 """.trimIndent()
-
+    private val _profileList = MutableLiveData<ArrayList<Profile>>()
+    val profileList: LiveData<ArrayList<Profile>> get() = _profileList
 
     fun parseJson(jsonString: String?): List<Profile>? {
         return try {
@@ -166,6 +171,52 @@ class DashboardViewModel : ViewModel() {
         }
     }
      */
+    fun fetchProfileList() {
+        viewModelScope.launch {
+            _profileList.value = ArrayList(parseJson(json))
+        }
+    }
 
-    var userList: ArrayList<Profile> = ArrayList(parseJson(json))
+    fun updateProfileList(newList: ArrayList<Profile>) {
+        _profileList.value = newList
+    }
+
+    fun updateProfileByIndex(index: Int, updatedProfile: Profile) {
+        // Get the current list from MutableLiveData
+        val currentList = _profileList.value ?: ArrayList()
+
+        // Ensure the index is valid
+        if (index in 0 until currentList.size) {
+            // Update the item at the specified index
+            currentList[index] = updatedProfile
+
+            // Update MutableLiveData with the modified list
+            _profileList.value = currentList
+        }
+    }
+    fun deleteProfileByIndex(index: Int) {
+        // Get the current list from MutableLiveData
+        val currentList = _profileList.value ?: ArrayList()
+        Log.e("ViewModel", "DELETED!!")
+
+        // Ensure the index is valid
+        if (index in 0 until currentList.size) {
+            // Remove the item at the specified index
+            currentList.removeAt(index)
+
+            // Update MutableLiveData with the modified list
+            _profileList.value = currentList
+        }
+    }
+
+    fun addProfile(newProfile: Profile) {
+        // Get the current list from MutableLiveData
+        val currentList = _profileList.value ?: ArrayList()
+
+        // Add the new item to the list
+        currentList.add(newProfile)
+
+        // Update MutableLiveData with the modified list
+        _profileList.value = currentList
+    }
 }

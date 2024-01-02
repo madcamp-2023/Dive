@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
 
-class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, val startForResultEdit: ActivityResultLauncher<Intent>) :
+class ProfileListAdapter(var profileList: ArrayList<Profile>, val context: Context, val startForResultDetail: ActivityResultLauncher<Intent>) :
     RecyclerView.Adapter<ProfileListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -26,7 +26,7 @@ class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, va
 
     private var listener: OnItemClickListener? = null
     val initialItem = ArrayList<Profile>().apply {
-        items.let { addAll(it) }
+        profileList.let { addAll(it) }
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -57,17 +57,17 @@ class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, va
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 if (results?.values is ArrayList<*>) {
-                    items.clear()
-                    items.addAll(results.values as ArrayList<Profile>)
+                    profileList.clear()
+                    profileList.addAll(results.values as ArrayList<Profile>)
                     notifyDataSetChanged()
                 }
             }
         }
     }
 
-    fun updateList(newItems: ArrayList<Profile>) {
-        items = newItems
-        Log.e("Adapter", "${items.size}^^^")
+    fun updateList(newList: ArrayList<Profile>) {
+        profileList.clear()
+        profileList.addAll(newList)
         notifyDataSetChanged()
     }
 
@@ -78,18 +78,17 @@ class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, va
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return profileList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(profileList[position])
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var pf_img: ImageView = itemView.findViewById(R.id.pfImg)
         private var pf_phone: TextView = itemView.findViewById(R.id.pfPhone)
         private var pf_name: TextView = itemView.findViewById(R.id.pfName)
-        private var pf_edit: FloatingActionButton = itemView.findViewById(R.id.editBtn)
 
         fun bind(item: Profile) {
             pf_phone.text = item.phone
@@ -109,20 +108,13 @@ class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, va
                 }
             }
             itemView.setOnClickListener {
-                Intent(context, ProfileDetailActivity::class.java).apply {
-                    putExtra("data_img", item.photo)
-                    putExtra("data_name", item.name)
-                    putExtra("data_phone", item.phone)
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }.run { context.startActivity(this) }
-            }
-            pf_edit.setOnClickListener {
-                val intent = Intent(context, ProfileEditActivity::class.java)
-                intent.putExtra("name", item.name)
-                intent.putExtra("phone", item.phone)
-                intent.putExtra("photo", item.photo)
-                intent.putExtra("idx", items.indexOf(item))
-                startForResultEdit.launch(intent)
+                val intent =  Intent(context, ProfileDetailActivity::class.java)
+                intent.putExtra("data_img", item.photo)
+                intent.putExtra("data_name", item.name)
+                intent.putExtra("data_phone", item.phone)
+                intent.putExtra("idx", profileList.indexOf(item))
+                Log.e("Adapter", "${profileList.indexOf(item)}")
+                startForResultDetail.launch(intent)
             }
         }
     }
