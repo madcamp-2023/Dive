@@ -104,6 +104,9 @@
                     android:layout_height="wrap_content"
                     android:text="Name"
                     android:textSize="24sp"
+                    android:textAppearance="@style/name"
+                    android:lineSpacingExtra="1sp"
+                    android:gravity="top"
                     app:layout_constraintStart_toStartOf="@+id/contact_text"
                     tools:layout_editor_absoluteY="400dp" />
 
@@ -111,10 +114,9 @@
                     android:id="@+id/add_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false"
                     android:ems="10"
                     android:inputType="text"
-                    android:text="@string/name"
+                    android:hint="@string/name"
                     app:layout_constraintBottom_toBottomOf="@+id/name_text"
                     app:layout_constraintEnd_toEndOf="@+id/add_contact"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -135,6 +137,10 @@
                     android:layout_height="wrap_content"
                     android:text="@string/contact"
                     android:textSize="24sp"
+                    android:textAppearance="@style/name"
+                    android:lineSpacingExtra="1sp"
+                    android:translationY="-0.63sp"
+                    android:gravity="top"
                     tools:layout_editor_absoluteX="33dp"
                     tools:layout_editor_absoluteY="481dp" />
 
@@ -144,6 +150,10 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="phone"
+                    android:hint="Contact"
+                    android:textAppearance="@style/label"
+                    android:lineSpacingExtra="1sp"
+                    android:gravity="top"
                     app:layout_constraintBottom_toBottomOf="@+id/contact_text"
                     app:layout_constraintStart_toEndOf="@+id/contact_text"
                     app:layout_constraintTop_toTopOf="@+id/contact_text" />
@@ -155,6 +165,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/add_contact"
+                android:clipToOutline="true"
+                android:background="@drawable/button_cont"
+                android:elevation="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
