@@ -2,7 +2,6 @@ package com.example.myapplication.ui.dashboard
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
 
-class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, val startForResultEdit: ActivityResultLauncher<Intent>) :
+class ProfileListAdapter(var profileList: ArrayList<Profile>, val context: Context, val startForResultEdit: ActivityResultLauncher<Intent>) :
     RecyclerView.Adapter<ProfileListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -26,7 +25,7 @@ class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, va
 
     private var listener: OnItemClickListener? = null
     val initialItem = ArrayList<Profile>().apply {
-        items.let { addAll(it) }
+        profileList.let { addAll(it) }
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -57,17 +56,17 @@ class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, va
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 if (results?.values is ArrayList<*>) {
-                    items.clear()
-                    items.addAll(results.values as ArrayList<Profile>)
+                    profileList.clear()
+                    profileList.addAll(results.values as ArrayList<Profile>)
                     notifyDataSetChanged()
                 }
             }
         }
     }
 
-    fun updateList(newItems: ArrayList<Profile>) {
-        items = newItems
-        Log.e("Adapter", "${items.size}^^^")
+    fun updateList(newList: ArrayList<Profile>) {
+        profileList.clear()
+        profileList.addAll(newList)
         notifyDataSetChanged()
     }
 
@@ -78,11 +77,11 @@ class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, va
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return profileList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(profileList[position])
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -121,7 +120,7 @@ class ProfileListAdapter(var items: ArrayList<Profile>, val context: Context, va
                 intent.putExtra("name", item.name)
                 intent.putExtra("phone", item.phone)
                 intent.putExtra("photo", item.photo)
-                intent.putExtra("idx", items.indexOf(item))
+                intent.putExtra("idx", profileList.indexOf(item))
                 startForResultEdit.launch(intent)
             }
         }
