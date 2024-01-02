@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
@@ -44,6 +45,7 @@ class ProfileDetailActivity : AppCompatActivity() {
                 finish()
             }
         }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_detail)
@@ -55,6 +57,8 @@ class ProfileDetailActivity : AppCompatActivity() {
         val detail_img = findViewById<ImageView>(R.id.detail_img)
         val backBtn = findViewById<ImageButton>(R.id.backButton)
         val editBtn = findViewById<FloatingActionButton>(R.id.editBtn)
+        val phoneBtn = findViewById<FloatingActionButton>(R.id.phoneButton)
+        val msgBtn = findViewById<FloatingActionButton>(R.id.messageButton)
 
         val data_img = intent.getStringExtra("data_img")
         val data_name = intent.getStringExtra("data_name")
@@ -74,6 +78,18 @@ class ProfileDetailActivity : AppCompatActivity() {
             intent.putExtra("name", data_name)
             intent.putExtra("phone", data_phone)
             startForResultEdit.launch(intent)
+        }
+
+        phoneBtn.setOnClickListener {
+            val myUri = Uri.parse("tel:$data_phone")
+            val intent = Intent(Intent.ACTION_DIAL, myUri)
+            startActivity(intent)
+        }
+
+        msgBtn.setOnClickListener {
+            val myUri = Uri.parse("smsto:$data_phone")
+            val intent = Intent(Intent.ACTION_SENDTO, myUri)
+            startActivity(intent)
         }
 
         Picasso.get().load(data_img).into(detail_img)
