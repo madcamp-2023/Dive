@@ -18,71 +18,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <Button-->
-<!--        android:id="@+id/action_btn1"-->
-<!--        android:layout_width="30dp"-->
-<!--        android:layout_height="30dp"-->
-<!--        android:layout_marginStart="64dp"-->
-<!--        android:layout_marginTop="30dp"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="5dp"-->
-<!--        android:text="K"-->
-<!--        android:visibility="invisible"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/action_btn1"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#00FFFFFF"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:text="K"
-        android:visibility="invisible"
-        android:background="@drawable/action_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/action_btn2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#00FFFFFF"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:text="N"
-        android:visibility="invisible"
-        android:background="@drawable/action_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/action_btn3"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#00FFFFFF"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:text="N"
-        android:visibility="invisible"
-        android:background="@drawable/action_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
     <ImageView
         android:id="@+id/tech_item_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:foreground="#66000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -92,20 +32,19 @@
 
     <ImageView
         android:id="@+id/tech_item_image"
-        android:layout_width="407dp"
-        android:layout_height="432dp"
-        android:rotation="21"
+        android:layout_width="412dp"
+        android:layout_height="222dp"
+        android:rotation="34"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.166"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/tech_blur_view"
-
         android:layout_width="297dp"
         android:layout_height="214dp"
 
@@ -113,7 +52,7 @@
         android:layout_marginBottom="84dp"
         android:background="@drawable/rounded_background"
         android:padding="20dp"
-        app:blurOverlayColor="#1E737E92"
+        app:blurOverlayColor="#FF737E92"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="Ready for 몰입캠프?"
                 android:textColor="@color/white"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -147,12 +86,55 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/action_button"
+                android:background="@drawable/action_white_button"
                 android:text="Dive!"
-                android:textColor="@color/black" />
+                android:textColor="@color/dive_btn"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
     </eightbitlab.com.blurview.BlurView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/action_btn1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/action_yellow_button"
+        android:text="K"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/action_btn2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/action_blue_button"
+        android:text="T"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/action_btn3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/action_green_button"
+        android:text="N"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

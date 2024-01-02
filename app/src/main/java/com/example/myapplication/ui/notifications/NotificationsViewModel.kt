@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.notifications
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,9 +19,44 @@ class NotificationsViewModel : ViewModel() {
     val blogList: LiveData<List<Blog>> = _blogList
 
     init {
-        fetchBlog()
+        fetchKakaoBlog()
     }
-    fun fetchBlog() {
+
+    fun fetchTossBlog() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val url = "https://toss.tech/"
+            val docs = Jsoup.connect(url).get()
+            val aTags = docs.select("a.e3wfjt72")
+            val titleTags = docs.select("span.e3wfjt74")
+            val descriptionTags = docs.select("span.e3wfjt71")
+            val hrefList = aTags.map { it.attr("href") }.toSet().toList()
+            val imageSrcList =
+                docs.select("img.e3wfjt73")
+                    .map { it.attr("srcset") }.toSet().toList().filter { it.isNotEmpty() }
+            val titleList = titleTags.map { it.text() }.toSet().toList()
+            val descriptionList = descriptionTags.map { it.text() }.toSet().toList()
+
+            val blogs = hrefList.indices.map { index ->
+
+                val contentLimited = if (descriptionList[index].length > 40) {
+                    descriptionList[index].substring(0, 40) + "..."
+                } else {
+                    descriptionList[index]
+                }
+
+                Blog(
+                    url = imageSrcList.getOrNull(index) ?: "",
+                    title = titleList[index],
+                    content = contentLimited,
+                    page = url + hrefList.getOrNull(index),
+                )
+            }
+
+            _blogList.postValue(blogs)
+        }
+    }
+
+    fun fetchKakaoBlog() {
         viewModelScope.launch(Dispatchers.IO) {
             val url = "https://fe-developers.kakaoent.com"
             val docs = Jsoup.connect(url).get()
@@ -37,7 +73,7 @@ class NotificationsViewModel : ViewModel() {
             val blogs = hrefList.indices.map { index ->
 
                 val contentLimited = if (descriptionList[index].length > 40) {
-                    descriptionList[index].substring(0, 40)
+                    descriptionList[index].substring(0, 40) + "..."
                 } else {
                     descriptionList[index]
                 }
@@ -51,9 +87,6 @@ class NotificationsViewModel : ViewModel() {
             }
 
             _blogList.postValue(blogs)
-            blogs.map { blog ->
-                println("$blog\n")
-            }
         }
     }
 }

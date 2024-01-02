@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.squareup.picasso.Picasso
 
-class BlogPagerAdapter(private var blogList: List<Blog>) :
+class BlogPagerAdapter(
+    private var blogList: List<Blog>,
+    private val onBtn1Clicked: () -> Unit,
+    private val onBtn2Clicked: () -> Unit
+) :
     RecyclerView.Adapter<BlogPagerAdapter.BlogViewHolder>() {
     var isMenuOpen = false
 
@@ -61,17 +65,41 @@ class BlogPagerAdapter(private var blogList: List<Blog>) :
                     } else {
                         holder.btn1.visibility = View.VISIBLE
                         holder.btn2.visibility = View.VISIBLE
-                        holder.btn3.visibility = View.VISIBLE
+//                        holder.btn3.visibility = View.VISIBLE
                         isMenuOpen = true
                     }
                 }
         }
+
+        holder.btn1.setOnClickListener {
+            onBtn1Clicked()
+            isMenuOpen = false
+        }
+
+        holder.btn2.setOnClickListener {
+            onBtn2Clicked()
+            isMenuOpen = false
+        }
+
+        if (isMenuOpen) {
+            holder.btn1.visibility = View.VISIBLE
+            holder.btn2.visibility = View.VISIBLE
+        } else {
+            holder.btn1.visibility = View.INVISIBLE
+            holder.btn2.visibility = View.INVISIBLE
+        }
     }
-//    private operator fun <T> LiveData<T>.get(position: Int): Blog {
+
+    //    private operator fun <T> LiveData<T>.get(position: Int): Blog {
 //        return blogList.get(position)
 //    }
     override fun getItemCount(): Int {
         return blogList.size
+    }
+
+    fun hideButtons() {
+        isMenuOpen = false
+        notifyDataSetChanged()
     }
 
     fun updateBlogs(newBlogList: List<Blog>) {
