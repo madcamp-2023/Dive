@@ -3,13 +3,12 @@ package com.example.myapplication.ui.notifications
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.squareup.picasso.Picasso
@@ -68,56 +67,15 @@ class BlogPagerAdapter(private var blogList: List<Blog>) :
                 }
         }
     }
-
+//    private operator fun <T> LiveData<T>.get(position: Int): Blog {
+//        return blogList.get(position)
+//    }
     override fun getItemCount(): Int {
         return blogList.size
     }
 
-    private fun handleMenu(v: View) {
-
-
-//
-//        val popup = PopupMenu(v.context, v)
-//        val inflater: MenuInflater = popup.menuInflater
-//        inflater.inflate(R.menu.tab3_menu, popup.menu)
-//        popup.setOnMenuItemClickListener {
-//            menuItem ->
-//            when (menuItem.itemId) {
-//                R.id.action_btn1 -> {
-//
-//                }
-//
-//                R.id.action_btn2 -> {
-//
-//                }
-//
-//                R.id.action_btn3 -> {
-//
-//                }
-//
-//                else -> {}
-//            }
-//
-//
-//            true
-//        }
-//
-//
-//
-//        // 팝업이 표시되기 전에 애니메이션 적용
-//        popup.setOnDismissListener {
-//            // 팝업이 사라질 때 애니메이션 또는 후처리
-//        }
-//
-//        // 애니메이션 효과 (예: 버튼 회전)
-//        v.animate()
-//            .rotationBy(360f) // 현재 위치에서 360도 회전
-//            .setDuration(500)
-//            .withEndAction {
-//                // 애니메이션 종료 후 팝업 표시
-//                v.rotation = 0f // 버튼의 회전을 초기 상태로 재설정
-//                popup.show()
-//            }
-
+    fun updateBlogs(newBlogList: List<Blog>) {
+        blogList = newBlogList
+        notifyDataSetChanged()
     }
 }
