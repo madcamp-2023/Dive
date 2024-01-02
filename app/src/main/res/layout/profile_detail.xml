@@ -96,8 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:backgroundTint="@drawable/container"
-            app:srcCompat="@android:drawable/ic_menu_call" />
+            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/messageButton"
@@ -105,8 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:backgroundTint="@drawable/container"
-            app:srcCompat="@android:drawable/ic_menu_send" />
+             />
     </LinearLayout>
 
 
