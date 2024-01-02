@@ -197,6 +197,7 @@ class DashboardViewModel : ViewModel() {
     fun deleteProfileByIndex(index: Int) {
         // Get the current list from MutableLiveData
         val currentList = _profileList.value ?: ArrayList()
+        Log.e("ViewModel", "DELETED!!")
 
         // Ensure the index is valid
         if (index in 0 until currentList.size) {

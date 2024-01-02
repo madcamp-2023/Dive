@@ -2,6 +2,7 @@ package com.example.myapplication.ui.dashboard
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
 
-class ProfileListAdapter(var profileList: ArrayList<Profile>, val context: Context, val startForResultEdit: ActivityResultLauncher<Intent>) :
+class ProfileListAdapter(var profileList: ArrayList<Profile>, val context: Context, val startForResultDetail: ActivityResultLauncher<Intent>) :
     RecyclerView.Adapter<ProfileListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -88,7 +89,6 @@ class ProfileListAdapter(var profileList: ArrayList<Profile>, val context: Conte
         private var pf_img: ImageView = itemView.findViewById(R.id.pfImg)
         private var pf_phone: TextView = itemView.findViewById(R.id.pfPhone)
         private var pf_name: TextView = itemView.findViewById(R.id.pfName)
-        private var pf_edit: FloatingActionButton = itemView.findViewById(R.id.editBtn)
 
         fun bind(item: Profile) {
             pf_phone.text = item.phone
@@ -108,20 +108,13 @@ class ProfileListAdapter(var profileList: ArrayList<Profile>, val context: Conte
                 }
             }
             itemView.setOnClickListener {
-                Intent(context, ProfileDetailActivity::class.java).apply {
-                    putExtra("data_img", item.photo)
-                    putExtra("data_name", item.name)
-                    putExtra("data_phone", item.phone)
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }.run { context.startActivity(this) }
-            }
-            pf_edit.setOnClickListener {
-                val intent = Intent(context, ProfileEditActivity::class.java)
-                intent.putExtra("name", item.name)
-                intent.putExtra("phone", item.phone)
-                intent.putExtra("photo", item.photo)
+                val intent =  Intent(context, ProfileDetailActivity::class.java)
+                intent.putExtra("data_img", item.photo)
+                intent.putExtra("data_name", item.name)
+                intent.putExtra("data_phone", item.phone)
                 intent.putExtra("idx", profileList.indexOf(item))
-                startForResultEdit.launch(intent)
+                Log.e("Adapter", "${profileList.indexOf(item)}")
+                startForResultDetail.launch(intent)
             }
         }
     }

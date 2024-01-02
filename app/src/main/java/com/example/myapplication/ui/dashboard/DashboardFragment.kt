@@ -30,33 +30,6 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    /*
-    fun handleResultEdit(data: Intent?): ArrayList<Profile> {
-        // 결과 데이터를 사용하는 코드
-        if (!::userList.isInitialized) {
-            // Initialize the userList property
-            userList = (ViewModelProvider(this).get(DashboardViewModel::class.java)).userList
-        }
-        userList[data?.getIntExtra("idx", -1)!!] = Profile(
-            data?.getStringExtra("photo"),
-            data?.getStringExtra("name"),
-            data?.getStringExtra("phone"),
-        )
-        return userList
-    }
-     */
-
-    /*
-    private fun setupRecyclerView(profileList: ArrayList<Profile>) {
-        val profileListAdapter = ProfileListAdapter(profileList, requireContext(), startForResultEdit)
-        binding.listProfile.adapter = profileListAdapter
-        binding.listProfile.layoutManager = LinearLayoutManager(requireActivity())
-        binding.listProfile.setHasFixedSize(true)
-        setupSearchBar(profileListAdapter)
-    }
-
-     */
-
     private fun setupSearchBar(adapter: ProfileListAdapter) {
         searchBar = binding.searchBar
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -89,9 +62,8 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
          dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
-//        setupRecyclerView(ArrayList(emptyList<Profile>()))
         // setup Recycler View
-        val profileListAdapter = ProfileListAdapter(ArrayList(emptyList<Profile>()), requireContext(), startForResultEdit)
+        val profileListAdapter = ProfileListAdapter(ArrayList(emptyList<Profile>()), requireContext(), startForResultDetail)
         binding.listProfile.adapter = profileListAdapter
         binding.listProfile.layoutManager = LinearLayoutManager(requireActivity())
         binding.listProfile.setHasFixedSize(true)
@@ -125,7 +97,7 @@ class DashboardFragment : Fragment() {
             }
         }
 
-    private val startForResultEdit =
+    private val startForResultDetail =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
