@@ -6,18 +6,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.ProfileDetailActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
 
-class ProfileListAdapter(var profileList: ArrayList<Profile>, val context: Context, val startForResultDetail: ActivityResultLauncher<Intent>) :
+class ProfileListAdapter(
+    var profileList: ArrayList<Profile>,
+    val context: Context,
+    val startForResultDetail: ActivityResultLauncher<Intent>
+) :
     RecyclerView.Adapter<ProfileListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -25,45 +27,6 @@ class ProfileListAdapter(var profileList: ArrayList<Profile>, val context: Conte
     }
 
     private var listener: OnItemClickListener? = null
-    val initialItem = ArrayList<Profile>().apply {
-        profileList.let { addAll(it) }
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
-    }
-
-    fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val filteredList: ArrayList<Profile> = ArrayList()
-                if (constraint.isNullOrEmpty()) {
-                    initialItem.let { filteredList.addAll(it) }
-                } else {
-                    val query = constraint.toString().trim()
-                    initialItem.forEach {
-                        if (it.name!!.contains(query)) {
-                            filteredList.add(it)
-                        }
-                        if (it.phone!!.contains(query)) {
-                            filteredList.add(it)
-                        }
-                    }
-                }
-                val results = FilterResults()
-                results.values = filteredList
-                return results
-            }
-
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                if (results?.values is ArrayList<*>) {
-                    profileList.clear()
-                    profileList.addAll(results.values as ArrayList<Profile>)
-                    notifyDataSetChanged()
-                }
-            }
-        }
-    }
 
     fun updateList(newList: ArrayList<Profile>) {
         profileList.clear()
@@ -108,7 +71,7 @@ class ProfileListAdapter(var profileList: ArrayList<Profile>, val context: Conte
                 }
             }
             itemView.setOnClickListener {
-                val intent =  Intent(context, ProfileDetailActivity::class.java)
+                val intent = Intent(context, ProfileDetailActivity::class.java)
                 intent.putExtra("data_img", item.photo)
                 intent.putExtra("data_name", item.name)
                 intent.putExtra("data_phone", item.phone)

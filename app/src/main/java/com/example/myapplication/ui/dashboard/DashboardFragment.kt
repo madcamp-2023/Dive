@@ -22,28 +22,10 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private lateinit var dashboardViewModel: DashboardViewModel
     private lateinit var searchBar: SearchView
     private lateinit var addBtn: Button
     private val binding get() = _binding!!
-
-
-    private fun setupSearchBar(adapter: ProfileListAdapter) {
-        searchBar = binding.searchBar
-        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                adapter.getFilter().filter(query)
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                adapter.getFilter().filter(newText)
-                return true
-            }
-        })
-    }
 
     private fun setupAddBtn() {
         addBtn = binding.btnAdd
@@ -60,25 +42,49 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-         dashboardViewModel =
+        dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
         // setup Recycler View
-        val profileListAdapter = ProfileListAdapter(ArrayList(emptyList<Profile>()), requireContext(), startForResultDetail)
+        val profileListAdapter = ProfileListAdapter(
+            ArrayList(emptyList<Profile>()),
+            requireContext(),
+            startForResultDetail
+        )
         binding.listProfile.adapter = profileListAdapter
         binding.listProfile.layoutManager = LinearLayoutManager(requireActivity())
         binding.listProfile.setHasFixedSize(true)
 
-        setupSearchBar(profileListAdapter)
-        setupAddBtn()
+
+        // Fetch initial data
+        dashboardViewModel.fetchProfileList()
 
         // Observe the LiveData and update the adapter when data changes
         dashboardViewModel.profileList.observe(viewLifecycleOwner, Observer {
             profileListAdapter.updateList(it)
         })
 
-        // Fetch initial data
-        dashboardViewModel.fetchProfileList()
+        searchBar = binding.searchBar
+        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val oriProfileList = dashboardViewModel.profileList
+                val newProfileList = oriProfileList.value?.filter { profile ->
+                    query?.let { profile.name?.contains(it, ignoreCase = true) == true || profile.phone?.contains(it, ignoreCase = true) == true } ?: false
+                }
+                profileListAdapter.updateList(ArrayList(newProfileList))
+                return true
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val oriProfileList = dashboardViewModel.profileList
+                val newProfileList = oriProfileList.value?.filter { profile ->
+                    newText?.let { profile.name?.contains(it, ignoreCase = true) == true || profile.phone?.contains(it, ignoreCase = true) == true } ?: false
+                }
+                profileListAdapter.updateList(ArrayList(newProfileList))
+                return true
+                return true
+            }
+        })
+        setupAddBtn()
         // setPadding on Navigation Bar position
         binding.root.post {
             val navBarHeight =
@@ -108,10 +114,12 @@ class DashboardFragment : Fragment() {
                                 data?.getStringExtra("photo"),
                                 data?.getStringExtra("name"),
                                 data?.getStringExtra("phone"),
-                            ))
+                            )
+                        )
                     }
                 } else {
-                    data?.getIntExtra("idx", -1)?.let { dashboardViewModel.deleteProfileByIndex(it) }
+                    data?.getIntExtra("idx", -1)
+                        ?.let { dashboardViewModel.deleteProfileByIndex(it) }
                 }
             }
         }
