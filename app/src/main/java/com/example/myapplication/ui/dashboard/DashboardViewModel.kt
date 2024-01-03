@@ -21,107 +21,107 @@ class DashboardViewModel : ViewModel() {
     val json = """
         [
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/6596e100-ba83-4645-9a26-c807391289a2";
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/87d6fa16-15ac-42bc-bb32-94ce42b5f3cf";
             "name": "sihyun";
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/8de896a4-d2e2-4a7c-93eb-23faae44c5d9",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/84761b34-84bb-42c0-bf66-a506498ef395",
             "name": "정해준",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/253398bb-a62b-4ec3-aa2a-57dbf9978d9b",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/2c007cfc-65f7-476a-9951-472a8b4c83ec",
             "name": "권혁원",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/76166ca6-018f-4f93-90f2-78063aa28548",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/1537e3f1-f120-41bb-9b0e-26d149de8bd1",
             "name": "공영재",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/5ffa94af-d43f-4add-8c96-baa4f3b5c537",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/0532c18e-854f-49bb-b816-2f8ca4f50f25",
             "name": "박정민",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/da8d84c9-0155-4ebd-b858-ce2c654163a2",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/60570a7c-1f2f-4a88-adbd-e26b39a136cb",
             "name": "전진우",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/85482a1e-51d9-49ec-8af8-990f816b1dbe",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/df06aeef-c18f-4f12-aa06-19f60f7ce770",
             "name": "서재원",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/793a4a21-6d7a-470b-92b2-6a33312d888f",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/87df0154-1dc8-4ef6-8397-d6c0db45f41d",
             "name": "이하늘",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/286e4452-a230-49eb-af25-bae5b17c447a",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/3795585e-8727-4418-b0f1-f322192c2f36",
             "name": "이수민",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/33c70882-bfbe-4a1a-8873-131785d76c92",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/d4e4e44c-5bb1-4775-bc0f-19287d834b5a",
             "name": "이형진",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/386b5045-5323-4878-8bfe-81b0e8f6eaad",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/87c8e185-c0f1-40f3-9f9f-bb2f1bb68f40",
             "name": "김가연",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/08439684-5ed0-4ebb-92f6-fe3b06c3b22a",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/50fae077-3a19-4ee8-bba7-d03f372d34cc",
             "name": "조수연",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/76acb803-4f08-46af-951d-0d749eb37025",
+            "photo": "(https://github.com/madcamp-2023/w1/assets/79096116/883ed4f7-516f-4340-ad09-af6cbca083eb",
             "name": "박현규",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/ff94d570-fb38-44eb-9048-a266a82e399c",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/ec17620b-7daf-45e3-8afd-a748328d8ee9",
             "name": "정민서",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/66c90fdf-f206-4e66-a35b-d1af3bb09fa2",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/60042ad9-b96b-44f1-8f6d-3d63710902ec",
             "name": "박진석",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/4193915d-6f31-43e9-9b75-0140982ef966",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/aa2a1cce-cbcb-4fd0-954c-d11e1addb582",
             "name": "박은수",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/749b94c8-dbf5-4685-b739-266a095ce03c",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/771ed23f-076f-48b0-a9ba-6d6ce58a6ea2",
             "name": "김수환",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/924b49de-9f06-4a67-8d5f-4ddcaebb9180",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/a46c1fa3-178d-4562-973a-09e35a287ce0",
             "name": "정우현",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/890ac262-35e8-4378-8dde-8ccf491edbce",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/9a38c86e-9747-47df-8989-6dc8098ee7d5",
             "name": "강민구",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/890ac262-35e8-4378-8dde-8ccf491edbce",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/69c0eb9c-7ac4-4b9f-9ab9-468161616b0b",
             "name": "차지원",
             "phone": "010-0000-0000"
         },
         {
-            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/890ac262-35e8-4378-8dde-8ccf491edbce",
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/4ebd62a2-5745-4f0b-b503-c5946d7db599",
             "name": "김윤서",
             "phone": "010-0000-0000"
         }
