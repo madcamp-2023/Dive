@@ -1,14 +1,11 @@
 package com.example.myapplication.ui.home
 
+import ImageSliderAdapter
 import android.content.pm.PackageManager
-import android.graphics.RenderEffect
-import android.graphics.Shader
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : Fragment() {
 
@@ -25,6 +23,10 @@ class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var isLoading = false
+
+    private val imageList : List<Int> = listOf<Int>(
+        R.drawable.madcmap, R.drawable.memory2, R.drawable.memory3, R.drawable.memory4, R.drawable.memory5
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -49,13 +51,33 @@ class HomeFragment : Fragment() {
             isLoading = false
         })
 
+        // In your Fragment or Activity
+        binding.madcampViewPager.adapter = ImageSliderAdapter(imageList)
+
+        // After the layout has been inflated and the view hierarchy has been created
+        binding.recyclerView.post {
+            // Get the height of the ImageView
+            val imageViewHeight = binding.madcampViewPager.height
+
+            // Set the marginTop of the RecyclerView to be the same as the height of the ImageView
+            val layoutParams = binding.recyclerView.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.topMargin = imageViewHeight
+            binding.recyclerView.layoutParams = layoutParams
+        }
+
+        binding.recyclerView.post {
+            val navBarHeight =
+                requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).height
+            binding.recyclerView.setPadding(0, 0, 0, navBarHeight)
+        }
+
         loadImages()
 
         return root
     }
 
     private fun setupRecyclerView() {
-        binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.recyclerView.adapter = ImageAdapter(emptyList())
 
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {

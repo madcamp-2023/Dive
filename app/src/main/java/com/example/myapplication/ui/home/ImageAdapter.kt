@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
@@ -14,6 +15,7 @@ class ImageAdapter(private var images: List<ImageData>) : RecyclerView.Adapter<I
     private val cellSize = Resources.getSystem().displayMetrics.widthPixels / 3 // 3은 column count
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.imageView)
+        val btn: Button = view.findViewById(R.id.show_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,6 +33,13 @@ class ImageAdapter(private var images: List<ImageData>) : RecyclerView.Adapter<I
         // 이미지 클릭 이벤트 설정
 
         holder.imageView.setOnClickListener {
+            val intent = Intent(holder.imageView.context, ImageDetail::class.java)
+            intent.putExtra("imageUri", image.uri)
+            intent.putExtra("imageDate", image.date)
+            holder.itemView.context.startActivity(intent)
+        }
+
+        holder.btn.setOnClickListener {
             val intent = Intent(holder.imageView.context, ImageDetail::class.java)
             intent.putExtra("imageUri", image.uri)
             intent.putExtra("imageDate", image.date)

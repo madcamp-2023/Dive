@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "301058846471",
+    "project_id": "anjung-ab151",
+    "storage_bucket": "anjung-ab151.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301058846471:android:3d930e421e7bb593bb9fa2",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3S84t9gYsVyP_ZRfDfW5-dwOuKOm5dOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
