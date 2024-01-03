@@ -29,7 +29,7 @@ class ImageDetail : AppCompatActivity() {
 //        val overlayImage = findViewById<ImageView>(R.id.overlayImage)
         val imageUri: Uri? = intent.getParcelableExtra("imageUri")
 
-        fullScreenImage.scaleType = ImageView.ScaleType.CENTER_CROP
+        fullScreenImage.scaleType = ImageView.ScaleType.FIT_CENTER
         imageUri?.let {
             fullScreenImage.setImageURI(it)
         }
