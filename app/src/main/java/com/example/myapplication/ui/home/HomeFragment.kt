@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
     private var isLoading = false
 
     private val imageList : List<Int> = listOf<Int>(
-        R.drawable.madcmap, R.drawable.memory2, R.drawable.memory3, R.drawable.memory4, R.drawable.memory5
+        R.drawable.madcmap, R.drawable.memory3, R.drawable.memory5
     )
 
     override fun onCreateView(

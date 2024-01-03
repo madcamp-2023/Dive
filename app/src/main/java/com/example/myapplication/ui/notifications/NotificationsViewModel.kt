@@ -22,7 +22,7 @@ class NotificationsViewModel : ViewModel() {
         fetchKakaoBlog()
     }
 
-    fun fetchTossBlog() {
+    fun fetchKakaoBlog() {
         viewModelScope.launch(Dispatchers.IO) {
             val url = "https://toss.tech/"
             val docs = Jsoup.connect(url).get()
@@ -56,7 +56,7 @@ class NotificationsViewModel : ViewModel() {
         }
     }
 
-    fun fetchKakaoBlog() {
+    fun fetchTossBlog() {
         viewModelScope.launch(Dispatchers.IO) {
             val url = "https://fe-developers.kakaoent.com"
             val docs = Jsoup.connect(url).get()
