@@ -68,10 +68,6 @@ class ProfileEditActivity : AppCompatActivity() {
             finish()
         }
         backBtn.setOnClickListener {
-//            val data = createIntent(null, null, null, false)
-//
-//            setResult(Activity.RESULT_OK, data)
-//            finish()
             onBackPressed()
         }
     }
