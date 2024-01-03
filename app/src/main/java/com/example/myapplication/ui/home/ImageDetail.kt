@@ -29,23 +29,23 @@ class ImageDetail : AppCompatActivity() {
 //        val overlayImage = findViewById<ImageView>(R.id.overlayImage)
         val imageUri: Uri? = intent.getParcelableExtra("imageUri")
 
-        fullScreenImage.scaleType = ImageView.ScaleType.CENTER_CROP
+        fullScreenImage.scaleType = ImageView.ScaleType.FIT_CENTER
         imageUri?.let {
             fullScreenImage.setImageURI(it)
         }
-
-        val blurView = findViewById<BlurView>(R.id.blur_view)
-        val blurRadius = 6f
-
-        val root = findViewById<ViewGroup>(R.id.image_detail_root)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            blurView.setupWith(root, RenderEffectBlur())
-                .setBlurRadius(blurRadius)
-        }else{
-            blurView.setupWith(root, RenderScriptBlur(this))
-                .setBlurRadius(blurRadius)
-        }
+//
+//        val blurView = findViewById<BlurView>(R.id.blur_view)
+//        val blurRadius = 6f
+//
+//        val root = findViewById<ViewGroup>(R.id.image_detail_root)
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            blurView.setupWith(root, RenderEffectBlur())
+//                .setBlurRadius(blurRadius)
+//        }else{
+//            blurView.setupWith(root, RenderScriptBlur(this))
+//                .setBlurRadius(blurRadius)
+//        }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
