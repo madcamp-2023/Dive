@@ -55,7 +55,7 @@ class ProfileDetailActivity : AppCompatActivity() {
         val detail_name = findViewById<TextView>(R.id.detail_name)
         val detail_phone = findViewById<TextView>(R.id.detail_phone)
         val detail_img = findViewById<ImageView>(R.id.detail_img)
-        val backBtn = findViewById<ImageButton>(R.id.backButton)
+        val backBtn = findViewById<ImageButton>(R.id.backButtonDetail)
         val editBtn = findViewById<FloatingActionButton>(R.id.editBtn)
         val phoneBtn = findViewById<FloatingActionButton>(R.id.phoneButton)
         val msgBtn = findViewById<FloatingActionButton>(R.id.messageButton)

@@ -18,8 +18,16 @@ class ProfileEditActivity : AppCompatActivity() {
     private lateinit var editPhoto: ImageView
     private lateinit var submitBtn: Button
     private lateinit var deleteBtn: Button
+    private lateinit var backBtn: ImageButton
 
-    // Function to handle button click and apply selected effect
+    fun createIntent(name: String?, phone:String?, photo: String?, del: Boolean): Intent {
+        val data = Intent()
+        data.putExtra("name", name)
+        data.putExtra("phone", phone)
+        data.putExtra("photo", photo)
+        data.putExtra("del", del)
+        return data
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +37,12 @@ class ProfileEditActivity : AppCompatActivity() {
         val dataPhone = intent.getStringExtra("phone")
         val dataImg = intent.getStringExtra("photo")
 
-
         editName = findViewById(R.id.edit_name)
         editPhone = findViewById(R.id.edit_contact)
         editPhoto = findViewById(R.id.edit_img)
         submitBtn = findViewById(R.id.edit_btn_submit)
         deleteBtn = findViewById(R.id.delete_btn_submit)
+        backBtn = findViewById(R.id.backButtonEdit)
 
         // initialize displayed data with original data
         editName.setText(dataName)
@@ -45,11 +53,7 @@ class ProfileEditActivity : AppCompatActivity() {
             val name = editName.text.toString()
             val contact = editPhone.text.toString()
 
-            val data = Intent()
-            data.putExtra("name", name)
-            data.putExtra("phone", contact)
-            data.putExtra("photo", dataImg)
-            data.putExtra("del", false)
+            val data = createIntent(name, contact, dataImg, false)
 
             setResult(Activity.RESULT_OK, data)
             finish()
@@ -58,14 +62,13 @@ class ProfileEditActivity : AppCompatActivity() {
             val name = editName.text.toString()
             val contact = editPhone.text.toString()
 
-            val data = Intent()
-            data.putExtra("name", name)
-            data.putExtra("phone", contact)
-            data.putExtra("photo", dataImg)
-            data.putExtra("del", true)
+            val data = createIntent(name, contact, dataImg, true)
 
             setResult(Activity.RESULT_OK, data)
             finish()
+        }
+        backBtn.setOnClickListener {
+            onBackPressed()
         }
     }
 }

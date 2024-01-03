@@ -114,6 +114,16 @@ class DashboardViewModel : ViewModel() {
             "photo": "https://github.com/madcamp-2023/w1/assets/79096116/890ac262-35e8-4378-8dde-8ccf491edbce",
             "name": "강민구",
             "phone": "010-0000-0000"
+        },
+        {
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/890ac262-35e8-4378-8dde-8ccf491edbce",
+            "name": "차지원",
+            "phone": "010-0000-0000"
+        },
+        {
+            "photo": "https://github.com/madcamp-2023/w1/assets/79096116/890ac262-35e8-4378-8dde-8ccf491edbce",
+            "name": "김윤서",
+            "phone": "010-0000-0000"
         }
     ]
 """.trimIndent()

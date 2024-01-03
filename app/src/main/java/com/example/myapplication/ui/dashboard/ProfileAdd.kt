@@ -20,8 +20,16 @@ class ProfileAddActivity : AppCompatActivity() {
     private lateinit var addName: EditText
     private lateinit var addContact: EditText
     private lateinit var submitBtn: Button
+    private lateinit var backBtn: ImageButton
 
     // Function to handle button click and apply selected effect
+    fun createIntent(name: String, phone:String, photo: String?): Intent {
+        val data = Intent()
+        data.putExtra("name", name)
+        data.putExtra("phone", phone)
+        data.putExtra("photo", photo)
+        return data
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +39,10 @@ class ProfileAddActivity : AppCompatActivity() {
         addName = findViewById(R.id.add_name)
         addContact = findViewById(R.id.add_contact)
         submitBtn = findViewById(R.id.btn_submit)
+        backBtn = findViewById(R.id.backButtonAdd)
+
         var url =
             "https://github.com/madcamp-2023/w1/assets/79096116/607e534b-a534-450b-a25d-581b35c92159"
-//        url =
-//            "https://github.com/madcamp-2023/w1/assets/79096116/ed170c2a-bd80-452d-9f81-d7ffe3e61435"
 
         group.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId) {
@@ -46,16 +54,13 @@ class ProfileAddActivity : AppCompatActivity() {
             val name = addName.text.toString()
             val contact = addContact.text.toString()
 
-            addName.text.clear()
-            addContact.text.clear()
-
-            val data = Intent()
-            data.putExtra("name", name)
-            data.putExtra("phone", contact)
-            data.putExtra("photo", url)
+            val data = createIntent(name, contact, url)
 
             setResult(Activity.RESULT_OK, data)
             finish()
+        }
+        backBtn.setOnClickListener {
+            onBackPressed()
         }
     }
 
