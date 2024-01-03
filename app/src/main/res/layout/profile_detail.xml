@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contact_det"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +11,7 @@
     <!-- activity_layout.xml -->
 
     <ImageButton
-        android:id="@+id/backButton"
+        android:id="@+id/backButtonDetail"
         android:layout_width="68dp"
         android:layout_height="64dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -35,6 +34,7 @@
         android:layout_marginEnd="8dp"
         android:backgroundTint="#E8E1F1"
         android:background="@drawable/container"
+        app:borderWidth="0dp"
         android:elevation="0dp"
         android:strokeWidth="0"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -96,6 +96,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
+            android:backgroundTint="#E8E1F1"
+            app:borderWidth="0dp"
+            app:srcCompat="@android:drawable/ic_menu_call"
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -104,6 +107,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
+            android:backgroundTint="#E8E1F1"
+            app:borderWidth="0dp"
+            app:srcCompat="@android:drawable/ic_menu_send"
              />
     </LinearLayout>
 
