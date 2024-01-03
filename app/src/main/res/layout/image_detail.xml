@@ -18,53 +18,53 @@
         android:scaleType="centerCrop"
         tools:src="@tools:sample/backgrounds/scenic" />
 
-    <eightbitlab.com.blurview.BlurView
-        android:id="@+id/blur_view"
+<!--    <eightbitlab.com.blurview.BlurView-->
+<!--        android:id="@+id/blur_view"-->
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
 
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="50dp"
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:layout_marginBottom="50dp"-->
 
-        android:padding="20dp"
-        app:blurOverlayColor="#1E737E92"
-        android:background="@drawable/rounded_background">
+<!--        android:padding="20dp"-->
+<!--        app:blurOverlayColor="#1E737E92"-->
+<!--        android:background="@drawable/rounded_background">-->
 
-        <LinearLayout
-            android:id="@+id/card"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/card"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ready for 몰입캠프?"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="22sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Design for the future"
-                android:textColor="#C8C8C8"
-                android:textSize="14sp"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/action_button"
-                android:text="Dive!"
-                android:textColor="@color/white"
-                />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Ready for 몰입캠프?"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="22sp"/>-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Design for the future"-->
+<!--                android:textColor="#C8C8C8"-->
+<!--                android:textSize="14sp"/>-->
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="30dp"-->
+<!--                android:background="@drawable/action_button"-->
+<!--                android:text="Dive!"-->
+<!--                android:textColor="@color/white"-->
+<!--                />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
-    </eightbitlab.com.blurview.BlurView>
+<!--    </eightbitlab.com.blurview.BlurView>-->
 
 
 <!--    <ImageView-->
