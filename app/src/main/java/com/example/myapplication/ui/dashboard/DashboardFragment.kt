@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentDashboardBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class DashboardFragment : Fragment() {
@@ -24,7 +25,7 @@ class DashboardFragment : Fragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel
     private lateinit var searchBar: SearchView
-    private lateinit var addBtn: Button
+    private lateinit var addBtn: FloatingActionButton
     private val binding get() = _binding!!
 
     private fun setupAddBtn() {
