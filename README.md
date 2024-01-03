@@ -44,8 +44,7 @@
 - 상단의 Search Bar를 통해 이름, 혹은 전화번호로 연락처를 검색할 수 있습니다.
 - 1분반 연락처 데이터 중 대표 사진의 경우, 구성원들의 인상을 반영하는 memoji로 엄선했습니다.
 
-![Frame 8](https://github.com/madcamp-2023/Dive/assets/79096116/224b501e-c91b-41f9-92af-48fe198d915d)
-![Frame 9](https://github.com/madcamp-2023/Dive/assets/79096116/d35d452c-36c4-4079-a758-3b7d357b8156)
+![Frame 11 (1)](https://github.com/madcamp-2023/Dive/assets/79096116/0917ba92-6dfb-4681-881e-ded386bc9461)
 
 
 
@@ -53,8 +52,8 @@
 ***Major Features***
 - 기기에 저장된 사진을 열람할 수 있습니다.
 - 갤러리 상단에 고정된 표지를 스와이프하여 2023W 몰입캠프 1분반 구성원들의 사진을 열람할 수 있습니다.
-- 
-![Frame 10](https://github.com/madcamp-2023/Dive/assets/79096116/b0f69810-f609-44ee-87b6-ba54652f1b87)
+
+![Frame 10 (1)](https://github.com/madcamp-2023/Dive/assets/79096116/0091b76e-583a-4383-8868-e45531613345)
 
 
 ### Tab 3: Dev
@@ -64,6 +63,6 @@
 - 화면을 스와이프하여 새로운 글을 열람할 수 있습니다.
     - 어플리케이션 내에서는 글의 제목, 표지, 요약을 확인할 수 있으며, "DIVE IN" 버튼을 통해 포스트 본문이 담긴 주소로 이동할 수 있습니다.
     - 
-![dive 1](https://github.com/madcamp-2023/Dive/assets/79096116/d3737db7-bbb4-42c6-b48a-570c060ea9e2)
+![Frame 12](https://github.com/madcamp-2023/Dive/assets/79096116/64e12781-649a-40bc-87ff-fff18dc8f723)
 
 
